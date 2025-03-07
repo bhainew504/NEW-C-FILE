@@ -1,0 +1,22 @@
+name: UDP Load Test
+
+on:  
+  workflow_dispatch  # Manually trigger the workflow
+
+jobs:
+  udp_test:
+    runs-on: ubuntu-latest  # Uses a GitHub-hosted Linux runner
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Get your repository code
+
+      - name: Install GCC
+        run: sudo apt update && sudo apt install -y gcc  
+
+      - name: Compile C Program
+        run: gcc -o udp_attack TF.c  
+
+      - name: Run UDP Attack
+        run: ./udp_attack <IP> <PORT <TIME> <THREAD>
+        
